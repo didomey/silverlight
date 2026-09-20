@@ -1,0 +1,31 @@
+<+>UTF-8
+===================================================================
+diff --git a/src/Cafe/CafeSystem.cpp b/src/Cafe/CafeSystem.cpp
+--- a/src/Cafe/CafeSystem.cpp	(revision 4838451512a8b5434bc21dd6fe6266bdad3a1c2c)
++++ b/src/Cafe/CafeSystem.cpp	(date 1698960192236)
+@@ -190,6 +190,10 @@
+ 	}
+ 	free(baseRpxData);
+ 	debug_printf("RPXHash: 0x%08x\n", currentBaseApplicationHash);
++
++	{
++		RPLLoader_AddDependency("silverlight.rpl");
++	}
+ }
+
+ fs::path getTitleSavePath()
+
+<+>UTF-8
+===================================================================
+diff --git a/src/Cafe/OS/RPL/rpl.cpp b/src/Cafe/OS/RPL/rpl.cpp
+--- a/src/Cafe/OS/RPL/rpl.cpp	(revision 4838451512a8b5434bc21dd6fe6266bdad3a1c2c)
++++ b/src/Cafe/OS/RPL/rpl.cpp	(date 1699021416487)
+@@ -2228,7 +2228,7 @@
+ {
+ 	for (sint32 i = 0; i < rplModuleCount; i++)
+ 	{
+-		if( rplModuleList[i]->entrypointCalled )
++		if( rplModuleList[i]->entrypointCalled || rplModuleList[i]->moduleName2 == "silverlight")
+ 			continue;
+ 		uint32 moduleHandle = RPLLoader_GetHandleByModuleName(rplModuleList[i]->moduleName2.c_str());
+ 		MPTR entryPoint = RPLLoader_GetModuleEntrypoint(rplModuleList[i]);

@@ -1,0 +1,5 @@
+namespace Modules {
+	void kickPlayer() {
+		
+	}
+}

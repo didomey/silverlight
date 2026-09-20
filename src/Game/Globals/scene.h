@@ -1,0 +1,5 @@
+#include "Game/Macros.h"
+
+GVARBIND(FREETEST_ADDR, 10031240, uint32_t);
+
+GVARBIND(DAYCHANGE_TARGET_SCENE, 10109f54, char*);

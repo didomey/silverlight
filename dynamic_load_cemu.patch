@@ -1,0 +1,28 @@
+Subject: [PATCH] add silverlight dynamic load
+---
+Index: src/Cafe/OS/RPL/rpl.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Cafe/OS/RPL/rpl.cpp b/src/Cafe/OS/RPL/rpl.cpp
+--- a/src/Cafe/OS/RPL/rpl.cpp	(revision 59dcc568c9f7130929732bb24e53df338749144a)
++++ b/src/Cafe/OS/RPL/rpl.cpp	(date 1699047632909)
+@@ -2164,6 +2160,17 @@
+ 		}
+ 	}
+ 	RPLLoader_Link();
++
++	{
++		auto module = RPLLoader_FindModuleByName("silverlight");
++		if(module == nullptr)
++			return;
++		MPTR initSilverFunc = RPLLoader_FindRPLExport(module, "initSilverlight", false);
++		MPTR updateSilverFunc = RPLLoader_FindRPLExport(module, "updateSilverlight", false);
++
++		memory_writeU32(0x101a1e24, initSilverFunc);
++		memory_writeU32(0x101a1e2c, updateSilverFunc);
++	}
+ }
+ 
+ void RPLLoader_SetMainModule(RPLModule* rplLoaderContext)

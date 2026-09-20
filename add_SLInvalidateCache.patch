@@ -1,0 +1,37 @@
+Subject: [PATCH] add SLInvalidateCache
+---
+Index: src/Cafe/OS/libs/coreinit/coreinit_Misc.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Cafe/OS/libs/coreinit/coreinit_Misc.cpp b/src/Cafe/OS/libs/coreinit/coreinit_Misc.cpp
+--- a/src/Cafe/OS/libs/coreinit/coreinit_Misc.cpp	(revision 59dcc568c9f7130929732bb24e53df338749144a)
++++ b/src/Cafe/OS/libs/coreinit/coreinit_Misc.cpp	(date 1699724883406)
+@@ -3,6 +3,7 @@
+ #include "Cafe/CafeSystem.h"
+ #include "Cafe/Filesystem/fsc.h"
+ #include <pugixml.hpp>
++#include <HW/Espresso/Recompiler/PPCRecompiler.h>
+ 
+ namespace coreinit
+ {
+@@ -449,6 +450,10 @@
+ 		return 0;
+ 	}
+ 
++	void SLInvalidateCache(uint32_t beginAddr, uint32_t endAddr){
++		PPCRecompiler_invalidateRange(beginAddr, endAddr);
++	}
++
+ 	void miscInit()
+ 	{
+ 		s_sdkVersion = CafeSystem::GetForegroundTitleSDKVersion();
+@@ -468,6 +473,7 @@
+ 
+ 		cafeExportRegister("coreinit", OSLaunchTitleByPathl, LogType::Placeholder);
+ 		cafeExportRegister("coreinit", OSRestartGame, LogType::Placeholder);
++		cafeExportRegister("coreinit", SLInvalidateCache, LogType::Placeholder);
+ 	}
+ 
+ };
