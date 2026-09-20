@@ -1,5 +1,5 @@
 # Silverlight
 
-![Silverlight](silverlight.png)
+![Silverlight](silverlight.webp)
 
 Courtesy of Omeyverse to the Splatoon community
